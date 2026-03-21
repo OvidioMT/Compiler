@@ -1,0 +1,13 @@
+package main;
+
+func main() int{
+
+  var arreglo [] int;
+  append(arreglo, 500);
+  append(arreglo, 45);
+
+  i:= arreglo[1];
+
+  print(i);
+  return 0;
+};

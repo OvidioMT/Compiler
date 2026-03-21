@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ide Go</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h2 {
+            margin-top: 10px;
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 0 auto;
+        }
+        form {
+            width: 80%;
+            margin: 5px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea {
+            width: 100%;
+            height: 350px;
+            padding: 10px;
+            border: 1px solid #8a3939;
+            border-radius: 5px;
+            resize: none;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        #campoTextoPequenno {
+            height: 90px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        #btnRun {
+            margin-right: 10px;
+        }
+    </style>
+    
+</head>
+<body>
+    <h2>Ide Go</h2>
+    <div class="btn-group">
+        <button type="button" id="btnRun" onclick="enviarCodigo()">Run</button>
+        <input type="file" id="archivo" name="archivo" accept=".txt" value="Select File">
+    </div>
+
+    <form id="formulario">
+        <label for="campoTextoGrande">Code:</label><br>
+        <textarea id="campoTextoGrande" name="campoTextoGrande"></textarea><br>
+        
+        <label for="campoTextoPequenno">Console:</label><br>
+        <textarea id="campoTextoPequenno" name="campoTextoPequenno"></textarea>
+    </form>
+
+    <script>
+        function enviarCodigo() {
+            var codigo = document.getElementById("campoTextoGrande").value;
+            var codigoCodificado = encodeURIComponent(codigo); // Codificar el contenido
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Mostrar solo los elementos de la lista de errores en el campo de texto pequeño
+                    document.getElementById("campoTextoPequenno").value = this.responseText;
+                }
+            };
+            xhttp.open("POST", "/", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("campoTexto=" + codigoCodificado); // Enviar el contenido codificado
+        }
+
+        document.getElementById("archivo").addEventListener("change", function() {
+            var archivo = this.files[0];
+            if (archivo) {
+                var reader = new FileReader();
+                reader.readAsText(archivo, "UTF-8");
+                reader.onload = function (evt) {
+                    var contenido = evt.target.result;
+                    document.getElementById("campoTextoGrande").value = contenido;
+                }
+                reader.onerror = function (evt) {
+                    document.getElementById("campoTextoGrande").value = "Error al leer el archivo";
+                }
+            } else {
+                document.getElementById("campoTextoPequenno").value = "No se ha seleccionado ningún archivo";
+            }
+        });
+    </script>
+    
+</body>
+</html>

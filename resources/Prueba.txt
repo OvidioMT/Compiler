@@ -1,0 +1,19 @@
+package main;
+
+func main() int{
+  var ic int;
+
+  ic =3;
+  ic2 := '5';
+
+  var arreglo [] int;
+
+  append(arreglo, 500);
+  append(arreglo, 45);
+
+  var i int;
+
+
+  print(i);
+  return 0;
+};

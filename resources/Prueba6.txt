@@ -1,0 +1,19 @@
+package main;
+
+func main() int{
+  var ic int;
+  var ic2 int;
+  var i int;
+  var e float;
+  var run rune;
+
+
+
+  ic = 3;
+  ic2 = 3;
+  e = 90.0;
+  run = '4';
+
+  print(e);
+  return 0;
+};

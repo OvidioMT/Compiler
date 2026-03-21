@@ -1,0 +1,13 @@
+package main;
+
+func main() int{
+  var ic int;
+  var ic2 int;
+  ic = 30;
+  ic2 = 3;
+
+  ic3 := ic / ic2;
+
+  print(ic3);
+  return 0;
+};
