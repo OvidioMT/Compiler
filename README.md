@@ -50,7 +50,6 @@ go run main.go
 ## Important notes
 
 - `main.go` currently invokes `clang` to build `module.ll`. If you don't want compilation/execution, modify the server to only write the IR file.
-- `readmes.md` contains an example README from another project and does not describe this compiler.
 - Many visitor methods in `checker` and `encoder` delegate to `VisitChildren`; those areas may need further implementation to support the full language.
 
 ## Recommended next steps
